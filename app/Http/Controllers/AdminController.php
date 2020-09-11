@@ -105,7 +105,7 @@ class AdminController extends Controller
     public function ajoute(){
         $data = request()->validate([
             'nom_materiel' => ['required', 'string', 'max:255'],
-            'disponilite' => ['rnom_materielequired', 'string', 'max:255'],
+            'disponilite' => ['required', 'string', 'max:255'],
         ]);
         Materiel::create($data);
         $materiel = Materiel::all();
