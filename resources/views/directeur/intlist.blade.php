@@ -82,7 +82,18 @@
                                             <button type="submit" class="btn btn-outline-danger">Suppreme</button>
                                         </form>
                                    </td>
+                                   @php
+                                   $exist = 'n';
+                                   try{
+                                       $facture = App\Facture::where('id_intervention',$e->id)->firstOrFail();
+                                       $exist = 'y';
+                                   }catch(Exception $Ex){
+                                       echo '';
+                                   }
+                                    @endphp
+
                                    @if($e->feneshed == 'oui')
+                                   @if($exist == 'n')
                                     <td>
                                         <form action="/admin/facteur" method="post">
                                             @csrf
@@ -90,9 +101,15 @@
                                             <button type="submit" class="btn btn-outline-info">Facteur</button>
                                         </form>
                                     </td>
-                                    @else
+                                    @endif
+                                    @endif
+                                    @if($e->feneshed == 'non')
                                     <td>*********</td>
                                     @endif
+                                    @if($exist == 'y')
+                                    <td>*********</td>
+                                    @endif
+
                                   </tr>
                                   @endforeach
                                 </tbody>
