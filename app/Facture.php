@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Materielused extends Model
+class Facture extends Model
 {
     //
     protected $guarded = [];

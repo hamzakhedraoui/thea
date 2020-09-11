@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Service;
+use App\Intervention;
+use App\Materiel;
+use App\Materielused;
+use Carbon\Carbon;
 class EmploiyeController extends Controller
 {
 
@@ -26,9 +30,47 @@ class EmploiyeController extends Controller
         return View('emploiye.home');
 
     }
-    public function ajoutecv(){
+    public function ajoutecv()
+    {
         $service = Service::All();
         $user = auth()->user()->id;
         return View('emploiye.confermation',compact('user','service'));
+    }
+    public function interventions()
+    {
+        $id = auth()->user()->id;
+        $intervention = Intervention::where('id_employe',$id)->orderBy('created_at', 'desc')->get();
+        return view('emploiye.home',compact('intervention'));
+    }
+    public function finish()
+    {
+        $auth = auth()->user()->id;
+        $user = User::findOrFail($auth);
+        $user->emp_free = 'oui';
+        $user->save();
+        $id = request('id');
+        $int = Intervention::findOrFail($id);
+        $int->feneshed = 'oui';
+        $mytime = Carbon::now();
+        $date = explode(' ',$mytime->toDateTimeString());
+        $int->date_fin = $date[0];
+        $int->save();
+        return redirect('/emp/interventions');
+    }
+    public function ajoutemat()
+    {
+        $id = request('id');
+        $materiel = Materiel::where('disponilite','oui')->get();
+        return View('emploiye.ajoutemat',compact('id','materiel'));
+
+    }
+    public function materiel()
+    {
+        $id = request('id');
+        $materiel = request('id_materiel');
+        $data = ['id_intervention'=>$id,'id_materiel'=>$materiel];
+        Materielused::create($data);
+        return redirect('/emp/interventions');
+
     }
 }

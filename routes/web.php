@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EmploiyeController;
 use Illuminate\Support\Facades\Route;
 
@@ -52,12 +53,24 @@ Route::get('/admin/pdf','AdminController@pdf');
 Route::get('/admin/listint','AdminController@listint');
 Route::post('/admin/intdelete', 'AdminController@intdelete');
 Route::post('/admin/intacteve', 'AdminController@intacteve');
+//gestion facteur (admin)
+Route::get('/admin/listfac','AdminController@listfac');
+Route::post('/admin/facteur','AdminController@facteur');
+Route::post('/admin/ajoutefacteur','AdminController@ajoutefacteur');
+Route::post('/admin/paye','AdminController@paye');
+Route::post('/admin/deletefacteur','AdminController@deletefacteur');
 //+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 //emploiye-------------------------------------------------------------------------------------------------------------------------
 Route::post('/emp/conferme','EmploiyeController@conferme');
 Route::get('/emp/ajoutecv','EmploiyeController@ajoutecv');
+Route::get('/emp/interventions','EmploiyeController@interventions');
+Route::post('/emp/finish','EmploiyeController@finish');
+Route::post('/emp/ajoutemat','EmploiyeController@ajoutemat');
+Route::post('/emp/materiel','EmploiyeController@materiel');
 //+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 //client-------------------------------------------------------------------------------------------------------------------------
 Route::post('/client/intervention','ClientController@intervention');
 Route::post('/client/ajoute','ClientController@ajoute');
+Route::get('/client/interventions','ClientController@interventions');
+Route::get('/client/facture','ClientController@facture');
 

@@ -41,17 +41,16 @@
                         <!-- Authentication Links -->
                         <li class="nav-item">
                             <a href="/admin/listemp" class="nav-link" onclick="event.preventDefault();
-                                document.getElementById('listemp').submit();">Intervention</a></li>
+                                document.getElementById('listemp').submit();">Create Intervention</a></li>
                             <form id="listemp" action="/client/intervention" method="POST" class="d-none">
                                 @csrf
                             </form>
-
-                        <li class="nav-item">
-                            <a href="/admin/listcli" class="nav-link" onclick="event.preventDefault();
-                                document.getElementById('listcli').submit();">Compte</a></li>
-                            <form id="listcli" action="/client/compte" method="POST" class="d-none">
-                               @csrf
-                           </form>
+                            <li class="nav-item">
+                                <a href="/client/interventions" class="nav-link" onclick="event.preventDefault();
+                                    document.getElementById('interventions').submit();">Interventions</a></li>
+                                <form id="interventions" action="/client/interventions" method="get" class="d-none">
+                                    @csrf
+                            </form>
                         @guest
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>

@@ -8,6 +8,7 @@ use App\User;
 use App\Materiel;
 use App\Service;
 use Carbon\Carbon;
+use App\Facture;
 use Exception;
 use Illuminate\Validation\Rule;
 class AdminController extends Controller
@@ -104,7 +105,7 @@ class AdminController extends Controller
     public function ajoute(){
         $data = request()->validate([
             'nom_materiel' => ['required', 'string', 'max:255'],
-            'disponilite' => ['required', 'string', 'max:255'],
+            'disponilite' => ['rnom_materielequired', 'string', 'max:255'],
         ]);
         Materiel::create($data);
         $materiel = Materiel::all();
@@ -201,7 +202,9 @@ class AdminController extends Controller
         $int = Intervention::findOrFail($id);
         $int->accepted = 'oui';
         try{
-            $emploiye = User::where('type','emploiye')->where('emp_free','oui')->firstOrFail();
+            $emploiye = User::where('type','emploiye')->where('emp_free','oui')->where('active','a')->firstOrFail();
+            $emploiye->emp_free = 'non';
+            $emploiye->save();
             $int->id_employe = $emploiye->id;
         }catch(Exception $ex){
             $intervention = Intervention::All();
@@ -215,5 +218,44 @@ class AdminController extends Controller
         $intervention = Intervention::All();
         $req->session()->flash('message2','intervention accepted seccesfully...');
         return view('directeur.intlist',compact('intervention'));
+    }
+    public function facteur()
+    {
+        $id = request('id');
+        return view('directeur.prix',compact('id'));
+    }
+    public function ajoutefacteur()
+    {
+        $id = request('id');
+        $intervention = Intervention::findOrFail($id);
+        $prix = request('prix');
+        $mytime = Carbon::now();
+        $date = explode(' ',$mytime->toDateTimeString());
+        $data = ['id_client'=>$intervention->id_client,'prix'=>$prix,'id_intervention'=>$id,'date'=>$date[0],'id_employe'=>$intervention->id_employe];
+        Facture::create($data);
+        $facture = Facture::All();
+        return view('directeur.facture',compact('facture'));
+
+    }
+    public function listfac()
+    {
+        $facture = Facture::All();
+        return view('directeur.facture',compact('facture'));
+    }
+    public function deletefacteur()
+    {
+        $id = request('id');
+        Facture::where('id',$id)->delete();
+        $facture = Facture::All();
+        return view('directeur.facture',compact('facture'));
+    }
+    public function paye()
+    {
+        $id = request('id');
+        $fac = Facture::findorFail($id);
+        $fac->payed = 'oui';
+        $fac->save();
+        $facture = Facture::All();
+        return view('directeur.facture',compact('facture'));
     }
 }

@@ -73,7 +73,7 @@
                         <li class="nav-item">
                             <a href="/admin/listfac" class="nav-link" onclick="event.preventDefault();
                                 document.getElementById('listfac').submit();">Facteur</a></li>
-                            <form id="listfac" action="/admin/listfac" method="POST" class="d-none">
+                            <form id="listfac" action="/admin/listfac" method="GET" class="d-none">
                                @csrf
                            </form>
                         @guest

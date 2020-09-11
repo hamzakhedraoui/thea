@@ -30,10 +30,10 @@ class HomeController extends Controller
         $user = auth()->user()->type;
         switch($user){
             case 'client':
-                return view('client.home');
+                return redirect('/client/interventions');
                 break;
             case 'emploiye':
-                return view('emploiye.home');
+                return redirect('/emp/interventions');
                 break;
             case 'directeur':
                 $emploiye = User::where('type','emploiye')->get();

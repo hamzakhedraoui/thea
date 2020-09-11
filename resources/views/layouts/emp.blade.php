@@ -40,18 +40,12 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         <li class="nav-item">
-                            <a href="/admin/listemp" class="nav-link" onclick="event.preventDefault();
-                                document.getElementById('listemp').submit();">Intervention</a></li>
-                            <form id="listemp" action="/emp/intervention" method="POST" class="d-none">
+                            <a href="/emp/interventions" class="nav-link" onclick="event.preventDefault();
+                                document.getElementById('/emp/interventions').submit();">Intervention</a></li>
+                            <form id="/emp/interventions" action="/emp/interventions" method="GET" class="d-none">
                                 @csrf
                             </form>
 
-                        <li class="nav-item">
-                            <a href="/admin/listcli" class="nav-link" onclick="event.preventDefault();
-                                document.getElementById('listcli').submit();">Compte</a></li>
-                            <form id="listcli" action="/emp/compte" method="POST" class="d-none">
-                               @csrf
-                           </form>
                         @guest
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>

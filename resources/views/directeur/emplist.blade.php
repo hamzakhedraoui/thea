@@ -13,6 +13,7 @@
                                     <th>Telephone</th>
                                     <th>Status</th>
                                     <th>Service</th>
+                                    <th>libre</th>
                                     <th>CV</th>
                                     <th>Suppreme</th>
                                     <th>Dis/Active</th>
@@ -41,6 +42,7 @@
                                     @endphp
                                     <td>{{$st}}</td>
                                     <td>{{$service}}</td>
+                                    <td>{{$e->emp_free}}</td>
                                     <td>
                                         <form action="/admin/pdf" method="GET">
                                             @csrf

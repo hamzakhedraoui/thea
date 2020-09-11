@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Facture;
 use Illuminate\Http\Request;
 use App\User;
 use App\Intervention;
@@ -23,5 +24,18 @@ class ClientController extends Controller
         Intervention::create($merg);
         $intervention = Intervention::where('id_client',auth()->user()->id)->get();
         return view('client.home',compact('intervention'));
+    }
+    public function interventions()
+    {
+        $id = auth()->user()->id;
+        $intervention = Intervention::where('id_client',$id)->orderBy('created_at', 'desc')->get();
+        return view('client.home',compact('intervention'));
+    }
+    public function facture()
+    {
+        $id = request('id');
+        $int = Intervention::findOrFail($id);
+        $facture = Facture::where('id_intervention',$int->id)->firstOrFail();
+        return view('client.facture',compact('facture'));
     }
 }

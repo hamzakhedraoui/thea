@@ -18,23 +18,20 @@
                                 <thead>
                                   <tr>
                                     <th>id</th>
+                                    <th>id intervention</th>
                                     <th>client</th>
-                                    <th>service</th>
-                                    <th>emploiye</th>
-                                    <th>date debeut</th>
-                                    <th>date fin</th>
-                                    <th>accepte-?</th>
-                                    <th>termine-?</th>
-                                    <th>accepte</th>
+                                    <th>employe</th>
+                                    <th>date</th>
+                                    <th>prix</th>
+                                    <th>payee-?</th>
+                                    <th>payee</th>
                                     <th>Suppreme</th>
-                                    <th>Facteur</th>
                                   </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($intervention as $e)
+                                @foreach($facture as $e)
                                   <tr>
                                     @php
-                                    $service = "";
                                     $emploiye = "";
                                     $client = "";
                                     try {
@@ -49,50 +46,33 @@
                                     } catch (Exception $ex) {
                                         echo '';
                                     }
-                                    try{
-                                        $services = App\Service::findOrFail($e->id_service);
-                                        $service = $services->nom_service;
-                                    } catch (Exception $ex) {
-                                        echo '';
-                                    }
                                 @endphp
                                   <td>{{$e->id}}</td>
+                                  <td>{{$e->id_intervention}}</td>
                                     <td>{{$client}}</td>
-                                    <td>{{$service}}</td>
                                     <td>{{$emploiye}}</td>
-                                    <td>{{$e->date_debut}}</td>
-                                    <td>{{$e->date_fin}}</td>
-                                    <td>{{$e->accepted}}</td>
-                                    <td>{{$e->feneshed}}</td>
-                                    @if($e->accepted == 'non')
+                                    <td>{{$e->date}}</td>
+                                    <td>{{$e->prix}} DA</td>
+                                    <td>{{$e->payed}}</td>
+                                    @if($e->payed == 'non' )
                                     <td>
-                                        <form action="/admin/intacteve" method="post">
+                                        <form action="/admin/paye" method="post">
                                             @csrf
                                             <input type="hidden" id="id" name="id" value="{{$e->id}}">
-                                            <button type="submit" class="btn btn-outline-info">accepte</button>
+                                            <button type="submit" class="btn btn-outline-info">payee</button>
                                         </form>
                                     </td>
                                     @else
-                                    <td>*********</td>
+                                    <td>********</td>
                                     @endif
                                     <td>
-                                        <form action="/admin/intdelete" method="POST">
-                                                @csrf
-                                        <input type="hidden" id="id" name="id" value="{{$e->id}}">
-                                            <button type="submit" class="btn btn-outline-danger">Suppreme</button>
-                                        </form>
-                                   </td>
-                                   @if($e->feneshed == 'oui')
-                                    <td>
-                                        <form action="/admin/facteur" method="post">
+
+                                        <form action="/admin/deletefacteur" method="post">
                                             @csrf
                                             <input type="hidden" id="id" name="id" value="{{$e->id}}">
-                                            <button type="submit" class="btn btn-outline-info">Facteur</button>
+                                            <button type="submit" class="btn btn-outline-info">suppreme</button>
                                         </form>
                                     </td>
-                                    @else
-                                    <td>*********</td>
-                                    @endif
                                   </tr>
                                   @endforeach
                                 </tbody>
