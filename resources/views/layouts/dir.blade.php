@@ -41,30 +41,41 @@
                         <!-- Authentication Links -->
                         <li class="nav-item">
                             <a href="/admin/listemp" class="nav-link" onclick="event.preventDefault();
-                                document.getElementById('listemp').submit();">gerer Emploiye</a></li>
+                                document.getElementById('listemp').submit();">Emploiye</a></li>
                             <form id="listemp" action="/admin/listemp" method="POST" class="d-none">
                                 @csrf
                             </form>
 
                         <li class="nav-item">
                             <a href="/admin/listcli" class="nav-link" onclick="event.preventDefault();
-                                document.getElementById('listcli').submit();">gerer client</a></li>
+                                document.getElementById('listcli').submit();">Client</a></li>
                             <form id="listcli" action="/admin/listcli" method="POST" class="d-none">
                                @csrf
                            </form>
                         <li class="nav-item">
                             <a href="/admin/listmat" class="nav-link" onclick="event.preventDefault();
-                                document.getElementById('listmat').submit();">gerer material</a></li>
+                                document.getElementById('listmat').submit();">Material</a></li>
                             <form id="listmat" action="/admin/listmat" method="POST" class="d-none">
                                @csrf
                            </form>
                         <li class="nav-item">
                             <a href="/admin/listser" class="nav-link" onclick="event.preventDefault();
-                                document.getElementById('listser').submit();">gerer service</a></li>
+                                document.getElementById('listser').submit();">Service</a></li>
                             <form id="listser" action="/admin/listser" method="POST" class="d-none">
                                @csrf
                            </form>
-                        <li class="nav-item"><a href="/admin" class="nav-link">aaaaaa</a></li>
+                        <li class="nav-item">
+                            <a href="/admin/listint" class="nav-link" onclick="event.preventDefault();
+                                document.getElementById('listint').submit();">Interventions</a></li>
+                            <form id="listint" action="/admin/listint" method="GET" class="d-none">
+                               @csrf
+                           </form>
+                        <li class="nav-item">
+                            <a href="/admin/listfac" class="nav-link" onclick="event.preventDefault();
+                                document.getElementById('listfac').submit();">Facteur</a></li>
+                            <form id="listfac" action="/admin/listfac" method="POST" class="d-none">
+                               @csrf
+                           </form>
                         @guest
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>

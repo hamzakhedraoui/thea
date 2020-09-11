@@ -77,9 +77,9 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'num_tlf' => $data['num_tlf'],
-            #'type' => $data['type'],
+            'type' => $data['type'],
             'active' => $active,
-            'type' => 'directeur',
+            #'type' => 'directeur',
         ]);
     }
     protected function redirectTo()

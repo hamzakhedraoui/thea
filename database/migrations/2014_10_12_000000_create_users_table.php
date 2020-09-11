@@ -24,6 +24,7 @@ class CreateUsersTable extends Migration
             $table->string('cv')->nullable()->default("n");
             $table->string('num_tlf');
             $table->string('type')->default('');
+            $table->string('emp_free')->default('oui'); //oui for employe not working non otherwise
             $table->string('active')->default('a'); //a for active , b for blocke (not active)
             $table->rememberToken();
             $table->timestamps();

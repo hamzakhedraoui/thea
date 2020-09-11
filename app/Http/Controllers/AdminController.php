@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Intervention;
 use Illuminate\Http\Request;
 use App\User;
 use App\Materiel;
 use App\Service;
+use Carbon\Carbon;
+use Exception;
 use Illuminate\Validation\Rule;
 class AdminController extends Controller
 {
@@ -177,5 +180,40 @@ class AdminController extends Controller
         $ser->update($data);
         $service = Service::all();
         return view('directeur.serlist',compact('service'));
+    }
+    //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    public function listint()
+    {
+        $intervention = Intervention::All();
+        return view('directeur.intlist',compact('intervention'));
+    }
+    public function intdelete()
+    {
+        $id = request('id');
+        $int = Intervention::findOrFail($id);
+        $int->delete();
+        $intervention = Intervention::all();
+        return view('directeur.intlist',compact('intervention'));
+    }
+    public function intacteve(Request $req)
+    {
+        $id = request('id');
+        $int = Intervention::findOrFail($id);
+        $int->accepted = 'oui';
+        try{
+            $emploiye = User::where('type','emploiye')->where('emp_free','oui')->firstOrFail();
+            $int->id_employe = $emploiye->id;
+        }catch(Exception $ex){
+            $intervention = Intervention::All();
+            $req->session()->flash('message1','there is no free emploiye you need to try later or delete the intervention');
+            return view('directeur.intlist',compact('intervention'));
+        }
+        $mytime = Carbon::now();
+        $date = explode(' ',$mytime->toDateTimeString());
+        $int->date_debut = $date[0];
+        $int->save();
+        $intervention = Intervention::All();
+        $req->session()->flash('message2','intervention accepted seccesfully...');
+        return view('directeur.intlist',compact('intervention'));
     }
 }

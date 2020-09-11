@@ -48,8 +48,16 @@ Route::get('/admin/sermodifier', 'AdminController@sermodifier');
 Route::post('/admin/serdelete', 'AdminController@serdelete');
 Route::post('/admin/modifierser','AdminController@modifierser');
 Route::get('/admin/pdf','AdminController@pdf');
+//gestion intervention (admin)
+Route::get('/admin/listint','AdminController@listint');
+Route::post('/admin/intdelete', 'AdminController@intdelete');
+Route::post('/admin/intacteve', 'AdminController@intacteve');
 //+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 //emploiye-------------------------------------------------------------------------------------------------------------------------
 Route::post('/emp/conferme','EmploiyeController@conferme');
 Route::get('/emp/ajoutecv','EmploiyeController@ajoutecv');
+//+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+//client-------------------------------------------------------------------------------------------------------------------------
+Route::post('/client/intervention','ClientController@intervention');
+Route::post('/client/ajoute','ClientController@ajoute');
 

@@ -42,14 +42,14 @@
                         <li class="nav-item">
                             <a href="/admin/listemp" class="nav-link" onclick="event.preventDefault();
                                 document.getElementById('listemp').submit();">Intervention</a></li>
-                            <form id="listemp" action="/emp/intervention" method="POST" class="d-none">
+                            <form id="listemp" action="/client/intervention" method="POST" class="d-none">
                                 @csrf
                             </form>
 
                         <li class="nav-item">
                             <a href="/admin/listcli" class="nav-link" onclick="event.preventDefault();
                                 document.getElementById('listcli').submit();">Compte</a></li>
-                            <form id="listcli" action="/emp/compte" method="POST" class="d-none">
+                            <form id="listcli" action="/client/compte" method="POST" class="d-none">
                                @csrf
                            </form>
                         @guest
@@ -84,11 +84,7 @@
                 </div>
             </div>
         </nav>
-        @if(auth()->user()->active=='b')
-            <div class="alert alert-info" role="alert">
-                You'r account need to be activate import a <a href="/emp/ajoutecv">CV</a> and shoose a service to be abel to activate your account...
-            </div>
-        @endif
+
         <main class="py-4">
             @yield('content')
         </main>

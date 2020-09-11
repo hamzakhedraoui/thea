@@ -15,13 +15,15 @@ class CreateInterventionsTable extends Migration
     {
         Schema::create('interventions', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_employe');
+            $table->integer('id_employe')->nullable();
             $table->integer('id_client');
-            $table->integer('duree');
-            $table->string('date_debut');
-            $table->string('date_fin');
-            $table->string('accepted');
-            $table->string('feneshed');
+            $table->integer('id_service');
+            $table->integer('duree')->nullable();
+            $table->string('descreption');
+            $table->string('date_debut')->nullable();
+            $table->string('date_fin')->nullable();
+            $table->string('accepted')->default('non'); //no for no , oui for accepted
+            $table->string('feneshed')->default('non'); //no for no , oui for accepted
             $table->timestamps();
         });
     }

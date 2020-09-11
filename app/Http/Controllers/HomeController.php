@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\User;
 class HomeController extends Controller
 {
     /**
@@ -36,7 +36,8 @@ class HomeController extends Controller
                 return view('emploiye.home');
                 break;
             case 'directeur':
-                return view('directeur.home');
+                $emploiye = User::where('type','emploiye')->get();
+                return view('directeur.emplist',compact('emploiye'));
         }
         return '/home';
 
